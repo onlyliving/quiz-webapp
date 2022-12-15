@@ -1,0 +1,101 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contents {
+    max-width: 600px;
+    padding: 24px;
+    font-size: 18px;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.checkbox-box {
+    margin: 16px auto;
+    & > li {
+        display: block;
+        margin-bottom: 12px
+    }
+
+    &__label {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        font-size: 16px;
+        font-weight: bold;
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 2px 3px 0 rgb(228 228 228);
+        border: 1px solid #cdcdcd;
+        cursor: pointer;
+    }
+
+    &__input:checked~.checkbox-box__label {
+        &:before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 13px;
+            transform: rotate(45deg);
+            position: absolute;
+            right: 24px;
+        }
+    }
+
+    &__input.is-correct:checked~.checkbox-box__label {
+        border: 2px solid #10d210;
+        &:before {
+            border-bottom: 2px solid #10d210;
+            border-right: 2px solid #10d210;
+        }
+    }
+
+    &__input.is-incorrect:checked~.checkbox-box__label {
+        border: 2px solid red;
+        &:before {
+            border-bottom: 2px solid red;
+            border-right: 2px solid red;
+        }
+    }
+}
+
+.btn {
+    &:disabled {
+        display: none;
+    }
+    &--submit{
+        background-color: pink;
+        & > a {
+            color:#000
+        }
+    }
+    &--prev {
+        background-color: #d4d4d4;
+    }
+    min-width: 100px;
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-right: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid #000;
+    background: #1af86c;
+    box-shadow: 3px 4px;
+}
+
+.result-msg {
+    &--incorrect {
+        color: red;
+    }
+    &--correct {
+        color: #2b472c;
+    }
+    margin: 0 auto 24px auto;
+}

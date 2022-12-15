@@ -1,0 +1,139 @@
+body,
+button,
+input,
+select,
+textarea{
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+header,
+nav,
+main,
+section,
+article,
+aside,
+footer {
+    display: block;
+    box-sizing: border-box;
+}
+
+body {
+    cursor: default;
+    -webkit-overflow-scrolling: touch;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+ul,
+ol,
+li,
+input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+address {
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    -webkit-tap-highlight-color: transparent;
+    // color: #616161;
+    color: #006EFF;
+    cursor: pointer;
+}
+
+.button {
+    background: 0;
+    border: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+button:focus,
+textarea:focus {
+    outline: 0;
+}
+
+img {
+    border: 0 none;
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    opacity: 0;
+}
+
+input::-ms-check {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* IE10 이상에서 input box 에 추가된 지우기 버튼 제거 */
+input::-ms-clear {
+    display: none;
+}
+
+input:focus {
+    outline: 0;
+}
+
+.hide-text {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
+body, button, input {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+button {
+    cursor: pointer;
+    border: 0 none;
+    background-color: transparent;
+}
+
+.hide-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.is-require {
+    position:relative;
+    &:after {
+        content:"*";
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color:#F00001;
+    }
+}
