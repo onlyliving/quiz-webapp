@@ -8,7 +8,7 @@ import {
 
 export const Root = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/quiz-webapp">
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/quiz" element={<QuizPage />} />
