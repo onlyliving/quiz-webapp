@@ -20,13 +20,11 @@ const QuizPage = () => {
     const [questions, setQuestions] = useState<string[]>([""]);
     const [isSubmit, setIsSubmit] = useState<boolean>(false);
     const [isCorrect, setIsCorrect] = useState<boolean | null>();
-    const [activeInputIndex, setActiveInputIndex] = useState<number | null>();
     const [startTime, setStartTime] = useRecoilState(startTimeState);
     const [endTime, setEndTime] = useRecoilState(endTimeState);
 
     useEffect(() => {
         setStartTime(performance.now());
-
     }, []);
 
     useEffect(() => {
@@ -36,10 +34,8 @@ const QuizPage = () => {
 
     }, [quizData, step]);
 
-
     const { isLoading, isError, data, error } = useQuery("quizData", getQuiz, {
         onSuccess: res => {
-            console.log("loading 끝")
             let copyResult = [...res.results];
 
             for (let i = 0; i < res.results.length; i++) {
@@ -63,8 +59,7 @@ const QuizPage = () => {
     });
 
     if (isLoading) {
-        console.log("loading 시작");
-
+        return <Loader isShow={true} />
     }
 
     const handleNextBtn = () => {
@@ -77,32 +72,11 @@ const QuizPage = () => {
         if (!quizSelectValues[step + 1]) {
             setIsClick(false);
         }
-
-        setActiveInputIndex(null);
-
     };
 
     const handlePrevBtn = () => {
         setStep(step - 1);
     };
-
-    const inputRef = React.useRef<null[] | HTMLDivElement[]>([]);
-
-    useEffect(() => {
-
-        console.log(">>> inputRef.current => ", inputRef.current);
-        console.log(">>> 선택한 항목 quizSelectValues[step] => ", quizSelectValues[step]);
-        console.log(">>> step => ", step);
-        inputRef.current.some((item, index) => {
-            if ((item as HTMLInputElement).value === quizSelectValues[step]) {
-                console.log(item);
-                console.log(inputRef.current[index]);
-                console.log("index => ", index)
-                setActiveInputIndex(index);
-            }
-        })
-
-    }, [inputRef, quizSelectValues, step]);
 
     const changeInput = (event: React.ChangeEvent) => {
         console.log("changeInput");
@@ -118,8 +92,6 @@ const QuizPage = () => {
         console.log(">>> quizData => ", quizData);
 
         (quizSelectValues.length >= (quizData.length - 1)) && (quizSelectValues.every(item => item !== "")) ? setIsSubmit(true) : setIsSubmit(false);
-
-
 
         const copiedQuizData = JSON.parse(JSON.stringify(quizData)) as IQuiz[];
         copiedQuizData[step]["user_answer"] = getValue;
@@ -170,7 +142,7 @@ const QuizPage = () => {
                         <button type="button" className={`${styles["btn"]} ${styles["btn--submit"]}`} disabled={!isSubmit} onClick={handleSubmit}>제출</button>
                     </div>
                 </div>
-                <Loader isShow={false} />
+
 
 
             </div> : <></>
