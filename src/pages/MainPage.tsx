@@ -4,7 +4,6 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import { goOtherUrlPath } from "../utils/common";
 import { useRecoilState } from "recoil";
 import { quizSelectValuesState } from "../utils/atoms";
-const URL_BASE_PATH = '/quiz-webapp';
 
 const MainPage = () => {
     const [category, setCategory] = useState("random");
@@ -19,7 +18,7 @@ const MainPage = () => {
 
 
     const handleStart = () => {
-        return category === "random" ? goOtherUrlPath(`${URL_BASE_PATH}/quiz`) : goOtherUrlPath(`${URL_BASE_PATH}/quiz?category=${category}`)
+        return category === "random" ? goOtherUrlPath(`/quiz`) : goOtherUrlPath(`/quiz?category=${category}`)
     };
 
     useEffect(() => {

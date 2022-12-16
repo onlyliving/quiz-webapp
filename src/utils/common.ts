@@ -10,8 +10,10 @@ export const formatChartValueToPercent = (targetValue: number, totalValue: numbe
 }
 
 export const goOtherUrlPath = (urlPathName: string) => {
+    const URL_BASE_PATH = '/quiz-webapp';
+
     // update url
-    window.history.pushState({}, "", urlPathName);
+    window.history.pushState({}, "", `${URL_BASE_PATH}${urlPathName}`);
 
     // update page
     const navEvent = new PopStateEvent("popstate");
