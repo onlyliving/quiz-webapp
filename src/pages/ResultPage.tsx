@@ -5,6 +5,7 @@ import { IQuiz } from "../utils/apiHandlers";
 import { PieChart } from 'react-minimal-pie-chart';
 import { formatChartValueToPercent, goOtherUrlPath } from "../utils/common";
 import Timer from "../components/Timer";
+import SEO from "../components/SEO";
 import styles from "../styles/result.module.scss";
 import commonStyles from "../styles/common.module.scss";
 
@@ -75,7 +76,10 @@ const ResultPage = () => {
                 <button type="button" className={commonStyles["active-btn"]} onClick={handleGoMain}>메인 페이지로 이동</button>
             </div> :
             <div className={styles["container"]}>
-
+                <SEO
+                    title="Quiz Result"
+                    description="퀴즈 진행한 결과입니다. 오답노트도 있습니다."
+                />
                 <section className={styles["container__contents"]}>
                     <section className={styles["result-top-info"]}>
                         <h2 className={styles["container__head"]}>퀴즈 결과</h2>

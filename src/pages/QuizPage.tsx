@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { quizSelectValuesState, quizApiResState, startTimeState, endTimeState, quizCategoryState } from "../utils/atoms";
 import styles from "../styles/quiz.module.scss";
 import Loader from "../components/Loader";
+import SEO from "../components/SEO"
 
 import {
     useQuery,
@@ -112,6 +113,10 @@ const QuizPage = () => {
     return (
         quizData[step] ?
             <div className={styles["container"]}>
+                <SEO
+                    title="Quiz Questions"
+                    description="4지선다형 퀴즈를 진행합니다."
+                />
                 <div className={styles["contents"]}>
                     <div>카테고리 : {quizData[step].category}</div>
                     <div>문제 난이도 : {quizData[step].difficulty}</div>

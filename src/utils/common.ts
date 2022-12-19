@@ -12,8 +12,10 @@ export const formatChartValueToPercent = (targetValue: number, totalValue: numbe
 export const goOtherUrlPath = (urlPathName: string) => {
     const URL_BASE_PATH = '/quiz-webapp';
 
+    const title = urlPathName === "/quiz" ? "퀴즈 진행" : urlPathName === "/result" ? "퀴즈 결과" : urlPathName === "/" ? "퀴즈 메인" : "";
+
     // update url
-    window.history.pushState({}, "", `${URL_BASE_PATH}${urlPathName}`);
+    window.history.pushState({}, title, `${URL_BASE_PATH}${urlPathName}`);
 
     // update page
     const navEvent = new PopStateEvent("popstate");
