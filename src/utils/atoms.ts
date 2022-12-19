@@ -20,3 +20,8 @@ export const endTimeState = atom<number>({
     key: "endTimeState",
     default: 0
 });
+
+export const quizCategoryState = atom<string>({
+    key: "quizCategoryState",
+    default: "random"
+})

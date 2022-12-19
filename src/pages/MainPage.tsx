@@ -3,23 +3,22 @@ import styles from "../styles/main.module.scss";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import { goOtherUrlPath } from "../utils/common";
 import { useRecoilState } from "recoil";
-import { quizSelectValuesState } from "../utils/atoms";
+import { quizSelectValuesState, quizCategoryState } from "../utils/atoms";
+
 
 const MainPage = () => {
     const [category, setCategory] = useState("random");
     const [quizSelectValues, setQuizSelectValues] = useRecoilState(quizSelectValuesState);
+    const [quizCategory, setQuizCategory] = useRecoilState(quizCategoryState);
+
 
     const handleSelect = (event: ChangeEvent) => {
         const target = event.target as HTMLSelectElement;
-        setCategory(target.value as "random" | "sports" | "animals")
+        setCategory(target.value as "random" | "sports" | "animals");
+        setQuizCategory(target.value as "random" | "sports" | "animals");
     };
 
-
-
-
-    const handleStart = () => {
-        return category === "random" ? goOtherUrlPath(`/quiz`) : goOtherUrlPath(`/quiz?category=${category}`)
-    };
+    const handleStart = () => goOtherUrlPath(`/quiz`);
 
     useEffect(() => {
         setQuizSelectValues([""]);

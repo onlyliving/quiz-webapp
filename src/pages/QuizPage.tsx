@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getQuiz, IQuiz } from "../utils/apiHandlers";
 import { shuffle, goOtherUrlPath, formatCurrentDateToYYYYMMDD } from "../utils/common";
 import { useRecoilState } from "recoil";
-import { quizSelectValuesState, quizApiResState, startTimeState, endTimeState } from "../utils/atoms";
+import { quizSelectValuesState, quizApiResState, startTimeState, endTimeState, quizCategoryState } from "../utils/atoms";
 import styles from "../styles/quiz.module.scss";
 import Loader from "../components/Loader";
 
@@ -22,6 +22,7 @@ const QuizPage = () => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>();
     const [startTime, setStartTime] = useRecoilState(startTimeState);
     const [endTime, setEndTime] = useRecoilState(endTimeState);
+    const [quizCategory, setCategory] = useRecoilState(quizCategoryState);
 
     useEffect(() => {
         setStartTime(performance.now());
@@ -34,7 +35,7 @@ const QuizPage = () => {
 
     }, [quizData, step]);
 
-    const { isLoading, isError, data, error } = useQuery("quizData", getQuiz, {
+    const { isLoading } = useQuery(["quizData", quizCategory], () => getQuiz(quizCategory), {
         onSuccess: res => {
             let copyResult = [...res.results];
 
@@ -103,8 +104,10 @@ const QuizPage = () => {
 
     const handleSubmit = () => {
         setEndTime(performance.now());
-        goOtherUrlPath("/result")
+        goOtherUrlPath("/result");
     };
+
+    const quizTitleText = quizData[step] ? quizData[step].question.replaceAll("&quot;", `"`).replaceAll("&#039;", `'`) : "";
 
     return (
         quizData[step] ?
@@ -112,7 +115,7 @@ const QuizPage = () => {
                 <div className={styles["contents"]}>
                     <div>카테고리 : {quizData[step].category}</div>
                     <div>문제 난이도 : {quizData[step].difficulty}</div>
-                    <div>{quizData[step].question}</div>
+                    <div>{quizTitleText}</div>
                     <ul className={styles["checkbox-box"]}>
                         {
                             questions ?

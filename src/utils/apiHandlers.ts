@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getParameter } from "../utils/common";
 
 export interface IQuiz {
     "category": string,
@@ -20,7 +19,8 @@ export interface IQuizReturnProps {
     "results": IQuiz[]
 }
 
-export const getQuiz = async (): Promise<IQuizReturnProps> => {
+export const getQuiz = async (category: string): Promise<IQuizReturnProps> => {
+    
     /**
      * type은 고정값
      * 카테고리, 난이도, 문제수는 변경 가능
@@ -30,15 +30,13 @@ export const getQuiz = async (): Promise<IQuizReturnProps> => {
      * 문제수 : number
      */
 
-    const category = getParameter("category") ? getParameter("category") as "sports" | "animals" : "";
-
     const CATEGORY_NAMING: {[str: string]: number} = {
         "sports": 21,
         "animals": 27
     };
     
     const res = await axios({
-        url: category ? `?category=${CATEGORY_NAMING[category]}&amount=4&type=multiple` : "?amount=4&type=multiple",
+        url: (category && category !== "random") ? `?category=${CATEGORY_NAMING[category]}&amount=4&type=multiple` : "?amount=4&type=multiple",
         baseURL: "https://opentdb.com/api.php",
         method: "get",
         headers: {
